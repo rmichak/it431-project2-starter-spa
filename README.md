@@ -1,21 +1,23 @@
-# IT 431 — Project 2 Starter
+# IT 431 — Project 2: Single-Page Application (SPA)
 
-A starter template for the IT 431 Data-Driven Web Application project.
+This is a **React Router single-page application** starter for the IT 431 Data-Driven Web Application project. It uses client-side routing so each page has its own URL (`/`, `/products`, `/signin`, `/signup`), the browser back button works, and users can bookmark individual pages.
+
+> **This starter uses React Router (Option A from the project instructions).** If you prefer conditional rendering (Option B), start fresh with `npm create vite@latest` and build from there — you already know how from Module 5.
 
 ## Tech Stack
 
 - **React 18** + **Vite** — Front-end framework
 - **TypeScript** — Type-safe JavaScript
 - **Supabase** — Database and authentication
-- **React Router v7** — Client-side routing (already wired up)
+- **React Router v7** — Client-side routing (installed and wired up)
 
 ## Getting Started
 
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/rmichak/it431-project2-starter.git
-cd it431-project2-starter
+git clone https://github.com/rmichak/it431-project2-spa.git
+cd it431-project2-spa
 npm install
 ```
 
@@ -86,6 +88,22 @@ npm run dev
 
 Open [http://localhost:5173](http://localhost:5173)
 
+## How React Router Works in This Project
+
+This app uses **React Router v7** for client-side navigation. Here's how it's set up:
+
+| File | What it does |
+|------|-------------|
+| `src/main.tsx` | Wraps the app in `<BrowserRouter>` — enables routing for the entire app |
+| `src/App.tsx` | Defines `<Routes>` with a `<Route>` for each page (`/`, `/products`, `/signin`, `/signup`) |
+| `src/components/Navbar.tsx` | Uses `<Link>` components instead of `<a>` tags for navigation without page reloads |
+| `src/pages/SignIn.tsx` | Uses `useNavigate()` to redirect to `/products` after successful login |
+| `vercel.json` | Tells Vercel to route all URLs to `index.html` so React Router can handle them |
+
+**Key rule:** Use `<Link to="/path">` for navigation, not `<a href="/path">`. Anchor tags cause a full page reload. `Link` changes the URL without reloading.
+
+For a full walkthrough, see the **React Router Quick Start** tutorial posted on Canvas.
+
 ## What to Do
 
 Search the codebase for `TODO` comments — they tell you exactly what needs to be filled in:
@@ -121,7 +139,7 @@ Everything else is already wired up:
 ```
 src/
 ├── components/
-│   ├── Navbar.tsx          # Navigation bar with auth-aware links
+│   ├── Navbar.tsx          # Navigation bar with auth-aware Link components
 │   └── ProductForm.tsx     # Reusable add/edit form (TODO: add fields)
 ├── pages/
 │   ├── Home.tsx            # Landing page (TODO: customize)
